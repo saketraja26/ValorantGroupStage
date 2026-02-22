@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aarohan Valorant Tournament - Group Stage</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal-overlay" style="display: none;">
+        <div class="login-modal">
+            <h2>Authentication Required</h2>
+            <p>Enter credentials to access this section</p>
+            <form id="loginForm">
+                <div class="login-field">
+                    <label for="loginId">ID</label>
+                    <input type="text" id="loginId" autocomplete="off" required>
+                </div>
+                <div class="login-field">
+                    <label for="loginPass">Password</label>
+                    <input type="password" id="loginPass" autocomplete="off" required>
+                </div>
+                <p id="loginError" class="login-error"></p>
+                <div class="login-buttons">
+                    <button type="submit" class="btn-login">Login</button>
+                    <button type="button" class="btn-cancel" onclick="closeLoginModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Circle Button -->
+    <button id="adminCircleBtn" class="admin-circle-btn" title="Admin Panel">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+    </button>
+
+    <!-- Side Text Decorations -->
+    <div class="side-text left">VALORANT</div>
+    <div class="side-text right">VALORANT</div>
+
+    <div class="bg-overlay"></div>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Valorant_logo_-_pink_color_version.svg" alt="Valorant Logo" class="valorant-logo">
+            </div>
+            <h1>AAROHAN VALORANT TOURNAMENT</h1>
+            <h2>GROUP STAGE</h2>
+            <p class="organizer">Organized by <span class="highlight">DrawFive</span></p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="groups">Group Standings</button>
+            <button class="tab-btn" data-tab="results">LAN Qualifiers</button>
+        </nav>
+
+        <!-- Teams Section -->
+        <section class="teams-section">
+            <div class="corner-accent top-left"></div>
+            <div class="corner-accent top-right"></div>
+            <h2 class="section-title">TEAMS</h2>
+            <p class="section-subtitle">Aarohan Valorant Tournament</p>
+            <div class="teams-grid">
+                <div class="team-logo-box"><img src="logos/bots.webp" alt="BOTS" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/bloodline.png" alt="Bloodline" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/drawfive_icon.png" alt="CardBoard Rex" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/whiff.png" alt="Whiff" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/drawfive_icon.png" alt="FDK Hunters" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/blackflash.jpg" alt="BLACKFLASH" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/dragsquad.png" alt="Drag Squad" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/drawfive_icon.png" alt="Marathi Medium" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/drawfive_icon.png" alt="Power Rangers" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/zaza.jpg" alt="Zaza" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/mitwpuA.jpeg" alt="MIT WPU A" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/clip.jpeg" alt="Clip" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/ZexyBoyz.png" alt="Zexy Boys" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/apollo.jpg" alt="ApoLLo" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/drawfive_icon.png" alt="Zephyr" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/drawfive_icon.png" alt="M4C"></div>
+                <div class="team-logo-box"><img src="logos/mitwpuB.png" alt="MIT WPU B" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/flix.png" alt="Flix" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/drawfive_icon.png" alt="Stryker" onerror="this.src='logos/drawfive_icon.png'"></div>
+                <div class="team-logo-box"><img src="logos/shorudstep.jpg" alt="ShroudStep" onerror="this.src='logos/drawfive_icon.png'"></div>
+            </div>
+        </section>
+
+        <!-- Groups Section -->
+        <section id="groups" class="tab-content active">
+            <h2 class="section-title">GROUPS</h2>
+            <div class="groups-container">
+                <!-- Group A -->
+                <div class="group" id="groupA">
+                    <div class="group-header">
+                        <span class="group-letter">A</span>
+                        <span class="group-title">GROUP A</span>
+                    </div>
+                    <table class="standings-table">
+                        <thead>
+                            <tr>
+                                <th class="rank">#</th>
+                                <th class="team">Team</th>
+                                <th>W</th>
+                                <th>L</th>
+                                <th>RD</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="qualified">
+                                <td class="rank">1</td>
+                                <td class="team"><img src="logos/bots.webp" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>BOTS</span></td>
+                                <td>4</td>
+                                <td>0</td>
+                                <td class="positive">+38</td>
+                            </tr>
+                            <tr class="qualified">
+                                <td class="rank">2</td>
+                                <td class="team"><img src="logos/bloodline.png" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>Bloodline</span></td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td class="positive">+8</td>
+                            </tr>
+                            <tr>
+                                <td class="rank">3</td>
+                                <td class="team"><img src="logos/drawfive_icon.png" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>CardBoard Rex</span></td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td class="positive">+4</td>
+                            </tr>
+                            <tr>
+                                <td class="rank">4</td>
+                                <td class="team"><img src="logos/whiff.png" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>Whiff</span></td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td class="positive">+1</td>
+                            </tr>
+                            <tr class="eliminated">
+                                <td class="rank">5</td>
+                                <td class="team"><img src="logos/drawfive_icon.png" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>FDK Hunters</span></td>
+                                <td>0</td>
+                                <td>4</td>
+                                <td class="negative">-51</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Group B -->
+                <div class="group" id="groupB">
+                    <div class="group-header">
+                        <span class="group-letter">B</span>
+                        <span class="group-title">GROUP B</span>
+                    </div>
+                    <table class="standings-table">
+                        <thead>
+                            <tr>
+                                <th class="rank">#</th>
+                                <th class="team">Team</th>
+                                <th>W</th>
+                                <th>L</th>
+                                <th>RD</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="qualified">
+                                <td class="rank">1</td>
+                                <td class="team"><img src="logos/blackflash.jpg" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>BLACKFLASH</span></td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td class="positive">+26</td>
+                            </tr>
+                            <tr class="qualified">
+                                <td class="rank">2</td>
+                                <td class="team"><img src="logos/dragsquad.png" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>Drag Squad</span></td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td class="positive">+17</td>
+                            </tr>
+                            <tr>
+                                <td class="rank">3</td>
+                                <td class="team"><img src="logos/drawfive_icon.png" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>Marathi Medium</span></td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td class="positive">+4</td>
+                            </tr>
+                            <tr>
+                                <td class="rank">4</td>
+                                <td class="team"><img src="logos/drawfive_icon.png" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>Power Rangers</span></td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td class="positive">+2</td>
+                            </tr>
+                            <tr class="eliminated">
+                                <td class="rank">5</td>
+                                <td class="team"><img src="logos/zaza.jpg" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>Zaza</span></td>
+                                <td>0</td>
+                                <td>4</td>
+                                <td class="negative">-49</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Group C -->
+                <div class="group" id="groupC">
+                    <div class="group-header">
+                        <span class="group-letter">C</span>
+                        <span class="group-title">GROUP C</span>
+                    </div>
+                    <table class="standings-table">
+                        <thead>
+                            <tr>
+                                <th class="rank">#</th>
+                                <th class="team">Team</th>
+                                <th>W</th>
+                                <th>L</th>
+                                <th>RD</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="qualified">
+                                <td class="rank">1</td>
+                                <td class="team"><img src="logos/mitwpuA.jpeg" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>MIT WPU A</span></td>
+                                <td>4</td>
+                                <td>0</td>
+                                <td class="positive">+42</td>
+                            </tr>
+                            <tr class="qualified">
+                                <td class="rank">2</td>
+                                <td class="team"><img src="logos/clip.jpeg" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>Clip</span></td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td class="positive">+14</td>
+                            </tr>
+                            <tr>
+                                <td class="rank">3</td>
+                                <td class="team"><img src="logos/ZexyBoyz.png" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>Zexy Boys</span></td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td class="positive">+5</td>
+                            </tr>
+                            <tr>
+                                <td class="rank">4</td>
+                                <td class="team"><img src="logos/apollo.jpg" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>ApoLLo</span></td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td class="negative">-17</td>
+                            </tr>
+                            <tr class="eliminated">
+                                <td class="rank">5</td>
+                                <td class="team"><img src="logos/drawfive_icon.png" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>Zephyr</span></td>
+                                <td>0</td>
+                                <td>4</td>
+                                <td class="negative">-44</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Group D -->
+                <div class="group" id="groupD">
+                    <div class="group-header">
+                        <span class="group-letter">D</span>
+                        <span class="group-title">GROUP D</span>
+                    </div>
+                    <table class="standings-table">
+                        <thead>
+                            <tr>
+                                <th class="rank">#</th>
+                                <th class="team">Team</th>
+                                <th>W</th>
+                                <th>L</th>
+                                <th>RD</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="qualified">
+                                <td class="rank">1</td>
+                                <td class="team"><img src="logos/drawfive_icon.png" alt="" class="team-logo"><span>M4C</span></td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td class="positive">+35</td>
+                            </tr>
+                            <tr class="qualified">
+                                <td class="rank">2</td>
+                                <td class="team"><img src="logos/mitwpuB.png" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>MIT WPU B</span></td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td class="positive">+17</td>
+                            </tr>
+                            <tr>
+                                <td class="rank">3</td>
+                                <td class="team"><img src="logos/flix.png" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>Flix</span></td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td class="positive">+1</td>
+                            </tr>
+                            <tr>
+                                <td class="rank">4</td>
+                                <td class="team"><img src="logos/drawfive_icon.png" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>Stryker</span></td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td class="negative">-13</td>
+                            </tr>
+                            <tr class="eliminated">
+                                <td class="rank">5</td>
+                                <td class="team"><img src="logos/shorudstep.jpg" alt="" class="team-logo" onerror="this.src='logos/drawfive_icon.png'"><span>ShroudStep</span></td>
+                                <td>0</td>
+                                <td>4</td>
+                                <td class="negative">-40</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VS Banner -->
+        <div class="vs-banner">
+            <div class="vs-scroll">
+                <span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span><span>VS</span>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <section id="results" class="tab-content">
+            <div class="results-container">
+                <div class="results-header">
+                    <h2 class="section-title">LAN QUALIFIERS</h2>
+                    <p>Top 2 teams from each group advance to LAN Finals</p>
+                </div>
+                
+                <div class="qualifiers-grid">
+                    <div class="qualifier-card group-a">
+                        <div class="qualifier-group-badge">GROUP A</div>
+                        <div class="qualifier-teams">
+                            <div class="qualifier-team seed-1">
+                                <span class="seed">#1</span>
+                                <img src="logos/bots.webp" alt="" class="qualifier-logo" onerror="this.src='logos/drawfive_icon.png'">
+                                <span class="team-name">BOTS</span>
+                                <span class="record">4-0</span>
+                            </div>
+                            <div class="qualifier-team seed-2">
+                                <span class="seed">#2</span>
+                                <img src="logos/bloodline.png" alt="" class="qualifier-logo" onerror="this.src='logos/drawfive_icon.png'">
+                                <span class="team-name">Bloodline</span>
+                                <span class="record">3-1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qualifier-card group-b">
+                        <div class="qualifier-group-badge">GROUP B</div>
+                        <div class="qualifier-teams">
+                            <div class="qualifier-team seed-1">
+                                <span class="seed">#1</span>
+                                <img src="logos/blackflash.jpg" alt="" class="qualifier-logo" onerror="this.src='logos/drawfive_icon.png'">
+                                <span class="team-name">BLACKFLASH</span>
+                                <span class="record">3-1</span>
+                            </div>
+                            <div class="qualifier-team seed-2">
+                                <span class="seed">#2</span>
+                                <img src="logos/dragsquad.png" alt="" class="qualifier-logo" onerror="this.src='logos/drawfive_icon.png'">
+                                <span class="team-name">Drag Squad</span>
+                                <span class="record">3-1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qualifier-card group-c">
+                        <div class="qualifier-group-badge">GROUP C</div>
+                        <div class="qualifier-teams">
+                            <div class="qualifier-team seed-1">
+                                <span class="seed">#1</span>
+                                <img src="logos/mitwpuA.jpeg" alt="" class="qualifier-logo" onerror="this.src='logos/drawfive_icon.png'">
+                                <span class="team-name">MIT WPU A</span>
+                                <span class="record">4-0</span>
+                            </div>
+                            <div class="qualifier-team seed-2">
+                                <span class="seed">#2</span>
+                                <img src="logos/clip.jpeg" alt="" class="qualifier-logo" onerror="this.src='logos/drawfive_icon.png'">
+                                <span class="team-name">Clip</span>
+                                <span class="record">3-1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qualifier-card group-d">
+                        <div class="qualifier-group-badge">GROUP D</div>
+                        <div class="qualifier-teams">
+                            <div class="qualifier-team seed-1">
+                                <span class="seed">#1</span>
+                                <img src="logos/PHOTO-2026-02-18-20-35-27 - Raghav Uday.jpg" alt="" class="qualifier-logo" onerror="this.src='logos/drawfive_icon.png'">
+                                <span class="team-name">M4C</span>
+                                <span class="record">3-1</span>
+                            </div>
+                            <div class="qualifier-team seed-2">
+                                <span class="seed">#2</span>
+                                <img src="logos/mitwpuB.png" alt="" class="qualifier-logo" onerror="this.src='logos/drawfive_icon.png'">
+                                <span class="team-name">MIT WPU B</span>
+                                <span class="record">3-1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lan-banner">
+                    <div class="lan-text">
+                        <h3>8 TEAMS QUALIFIED FOR LAN FINALS</h3>
+                        <p>The battle continues offline!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Section -->
+        <section id="admin" class="tab-content">
+            <div class="admin-container">
+                <h2>Admin Panel</h2>
+                
+                <!-- Download Results Subsection -->
+                <div class="admin-subsection">
+                    <h3>Download Results Template</h3>
+                <p class="template-info">Generate and download tournament results as an image</p>
+                
+                <div class="template-preview" id="templatePreview">
+                    <div class="template-card">
+                        <div class="template-header">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Valorant_logo_-_pink_color_version.svg" alt="Valorant" class="template-valo-logo">
+                            <div class="template-title">
+                                <h1>Aarohan</h1>
+                                <h2>VALORANT TOURNAMENT</h2>
+                                <p class="template-subtitle">GROUP STAGE RESULTS</p>
+                            </div>
+                        </div>
+                        
+                        <div class="template-qualifiers">
+                            <h3>LAN QUALIFIERS</h3>
+                            <div class="template-groups">
+                                <div class="template-group">
+                                    <div class="template-group-title">GROUP A</div>
+                                    <div class="template-team-row" id="templateA1">
+                                        <span class="template-seed">1.</span>
+                                        <span class="template-team-name">BOTS</span>
+                                        <span class="template-record">4-0</span>
+                                    </div>
+                                    <div class="template-team-row" id="templateA2">
+                                        <span class="template-seed">2.</span>
+                                        <span class="template-team-name">Bloodline</span>
+                                        <span class="template-record">3-1</span>
+                                    </div>
+                                </div>
+                                <div class="template-group">
+                                    <div class="template-group-title">GROUP B</div>
+                                    <div class="template-team-row" id="templateB1">
+                                        <span class="template-seed">1.</span>
+                                        <span class="template-team-name">BLACKFLASH</span>
+                                        <span class="template-record">3-1</span>
+                                    </div>
+                                    <div class="template-team-row" id="templateB2">
+                                        <span class="template-seed">2.</span>
+                                        <span class="template-team-name">Drag Squad</span>
+                                        <span class="template-record">3-1</span>
+                                    </div>
+                                </div>
+                                <div class="template-group">
+                                    <div class="template-group-title">GROUP C</div>
+                                    <div class="template-team-row" id="templateC1">
+                                        <span class="template-seed">1.</span>
+                                        <span class="template-team-name">MIT WPU A</span>
+                                        <span class="template-record">4-0</span>
+                                    </div>
+                                    <div class="template-team-row" id="templateC2">
+                                        <span class="template-seed">2.</span>
+                                        <span class="template-team-name">Clip</span>
+                                        <span class="template-record">3-1</span>
+                                    </div>
+                                </div>
+                                <div class="template-group">
+                                    <div class="template-group-title">GROUP D</div>
+                                    <div class="template-team-row" id="templateD1">
+                                        <span class="template-seed">1.</span>
+                                        <span class="template-team-name">M4C</span>
+                                        <span class="template-record">3-1</span>
+                                    </div>
+                                    <div class="template-team-row" id="templateD2">
+                                        <span class="template-seed">2.</span>
+                                        <span class="template-team-name">MIT WPU B</span>
+                                        <span class="template-record">3-1</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="template-footer">
+                            <img src="logos/drawfive_logo.png" alt="DrawFive" class="template-drawfive-logo">
+                            <p>Organized by <span class="template-highlight">DrawFive</span></p>
+                            <p class="template-date">February 2026</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="template-actions">
+                    <button id="downloadTemplate" class="btn-download">Download as Image</button>
+                    <button id="refreshTemplate" class="btn-refresh">Refresh Data</button>
+                </div>
+                </div>
+                
+                <!-- Admin Controls Subsection -->
+                <div class="admin-subsection">
+                    <h3>Update Scores & Logos</h3>
+                
+                <div class="admin-form">
+                    <div class="form-group">
+                        <label for="groupSelect">Select Group:</label>
+                        <select id="groupSelect">
+                            <option value="A">Group A</option>
+                            <option value="B">Group B</option>
+                            <option value="C">Group C</option>
+                            <option value="D">Group D</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teamSelect">Select Team:</label>
+                        <select id="teamSelect">
+                            <!-- Options populated by JavaScript -->
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="winsInput">Wins:</label>
+                            <input type="number" id="winsInput" min="0" max="10">
+                        </div>
+                        <div class="form-group">
+                            <label for="lossesInput">Losses:</label>
+                            <input type="number" id="lossesInput" min="0" max="10">
+                        </div>
+                        <div class="form-group">
+                            <label for="rdInput">Round Difference:</label>
+                            <input type="number" id="rdInput">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="logoInput">Team Logo URL:</label>
+                        <input type="text" id="logoInput" placeholder="Enter logo URL or local path">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="logoFile">Or Upload Logo:</label>
+                        <input type="file" id="logoFile" accept="image/*">
+                    </div>
+
+                    <button id="updateBtn" class="btn-update">Update Team</button>
+                    <button id="exportBtn" class="btn-export">Export Data</button>
+                </div>
+
+                <div class="admin-info" style="margin-top: 20px;">
+                    <h3>Instructions:</h3>
+                    <ul>
+                        <li>Select a group and team to edit their stats</li>
+                        <li>Update wins, losses, and round difference</li>
+                        <li>Add team logos via URL or file upload</li>
+                        <li>Place logo files in the "logos" folder with names like: teamname.png</li>
+                        <li>Export data to save your changes</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Aarohan Valorant Tournament | Group Stage 2026</p>
+            <p class="footer-org">Organized by <span class="highlight">DrawFive</span></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
